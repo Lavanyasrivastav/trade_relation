@@ -92,6 +92,3 @@ The key difference between good and bad traders seems to come down to how they m
 
 Author
 Lavanya Srivastav
-
-or more story-driven (startup-style submission)
-
