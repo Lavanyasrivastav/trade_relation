@@ -1,83 +1,97 @@
-# trade_relation
-1. Problem Statement
+Trader Performance vs Market Sentiment
+Overview
+This project explores how Bitcoin market sentiment (Fear–Greed Index) influences trader behavior and performance using real trading data from Hyperliquid.
+The idea is simple:
+Do traders behave differently when the market is fearful vs greedy? And does that actually affect how much they earn?
+What I Tried to Answer
+1.Do traders make more money during Fear or Greed phases?
+2.Does win rate change depending on sentiment?
+3.Do traders take more risk (larger positions) in certain market conditions?
+4.Are successful traders behaving differently from others?
 
-This analysis explores the relationship between Bitcoin market sentiment (Fear–Greed Index) and trader performance and behavior using Hyperliquid historical trading data. The goal is to identify how sentiment impacts profitability, risk-taking, and trading patterns.
+Data Used
+1. Market Sentiment Dataset
+Daily classification: Extreme Fear → Extreme Greed
+2. Trader Dataset (Hyperliquid)
+Trade-level data including:
+  Account
+  Trade size (USD & tokens)
+  Buy/Sell side
+  Execution price
+  Closed PnL
+  Timestamp
 
-2. Key Findings
-🔹 2.1 Profitability vs Market Sentiment
-Highest average PnL: Extreme Greed → 67.89
-Lowest average PnL: Neutral / Extreme Fear → ~34
-Total PnL is highest during Fear (3.35M) due to higher trading activity, but:
-Efficiency (mean PnL) is clearly highest in Extreme Greed
+How I Approached It:
+    Data Preparation
+    Cleaned column names and formats
+    Converted timestamps into a consistent datetime format
+    Mapped each trade to a daily sentiment label
+    Merged both datasets on date
+    Feature Engineering
+    Created a flag for profitable trades (is_profit)
+    Used trade size (USD) as a proxy for risk-taking
+    Calculated:
+      Average PnL
+      Win rate
+      Trade frequency
 
-👉 Insight:
+Key Findings
+1. Profitability is highest during Extreme Greed
+    Traders earn the most on average when the market is strongly bullish
+    Win rate is also highest in this phase (~46%)
+👉 Suggests that trend-following works better in bullish conditions
 
-Traders are most profitable during strong bullish sentiment (Extreme Greed)
-Fear phases generate volume but not efficient profits
-🔹 2.2 Win Rate Behavior
-Highest win rate: Extreme Greed → 46.5%
-Lowest win rate: Extreme Fear → 37.0%
+2. Fear phases drive activity, not efficiency
+    Highest number of trades and total volume occur during Fear
+    But:
+    Lower win rate
+    Lower average PnL
+👉 Looks like panic or reactive trading, not strategic trading
 
-👉 Insight:
+3. Traders take bigger risks during Fear
+   Average trade size is highest during Fear (~$7.8k)
+👉 But this doesn’t improve performance →
+   more risk, worse outcomes
 
-Market optimism improves trade success probability
-Fear introduces uncertainty and lower predictability
-🔹 2.3 Risk-Taking Behavior (Trade Size)
-Largest average trade size: Fear → $7,816
-Followed by Greed → $5,736
+4. Good traders behave differently
+   Top traders remain profitable across all conditions
+   They perform especially well during Extreme Greed
+   Poor performers:
+      Lose money in volatile phases
+      Likely overtrade or mismanage risk
 
-👉 Insight:
 
-Traders take larger positions during Fear, likely attempting to capitalize on volatility
-However, this does not translate into better profitability, indicating inefficient risk-taking
-🔹 2.4 Trading Activity (Volume & Frequency)
-Highest trade count: Fear → 61,837 trades
-Highest total volume: Fear → $483M
+Strategy Takeaways
+Based on the analysis:
+1. Lean into strong trends (Greed phases)
+Increase exposure when sentiment is strongly positive—this is where both win rate and PnL peak.
+2. Be cautious during Fear
+Even though activity increases, results worsen. Reducing position size helps avoid unnecessary losses.
+3. Avoid overtrading in volatile markets
+Higher frequency during Fear doesn’t translate into better outcomes.
 
-👉 Insight:
+Tools Used
+Python
+Pandas
+NumPy
+Matplotlib / Seaborn
+Google Colab
 
-Fear phases trigger increased trading activity
-This suggests panic-driven or reactive trading behavior
-🔹 2.5 Trader Segmentation (Critical Insight)
-Top Traders:
-Consistently profitable across all sentiments
-Peak performance in Extreme Greed (136.96 avg PnL)
-Bottom Traders:
-Losses in:
-Extreme Fear (-22.55)
-Greed (-35.68)
 
-👉 Insight:
+How to Run This::
+   Clone the repo
+   Open the notebook (Jupyter or Colab)
+   Install required libraries if needed
+   Run all cells in order
 
-Top traders:
-Exploit strong trends (Greed phases)
-Maintain profitability even in uncertainty
-Bottom traders:
-Struggle during volatile or transitional phases
-Likely overtrade or mismanage risk
-3. Behavioral Patterns Identified
-Greed Phases
-Higher profitability
-Higher win rates
-More efficient trading
-Fear Phases
-Higher trading activity
-Larger trade sizes
-Lower win rates
-Signs of emotional trading
-4. Strategic Insights
-Market sentiment is a strong macro indicator for trading performance
-Extreme Greed provides optimal conditions for trend-following strategies
-Fear phases should be approached cautiously, with reduced exposure
-5. Actionable Recommendations
-Increase position sizing during strong bullish sentiment (Greed)
-Reduce exposure and avoid overtrading during Fear phases
-Implement sentiment-aware risk management strategies
-Use sentiment as a filter for trade selection and timing
-6. Conclusion
+Final Thoughts
+This analysis shows a clear pattern:
+Greed → better performance, more stable outcomes
+Fear → more activity, but worse decisions
+The key difference between good and bad traders seems to come down to how they manage risk under different market conditions.
 
-The analysis demonstrates a clear relationship between market sentiment and trading outcomes.
+Author
+Lavanya Srivastav
 
-Profitability is highest during strong bullish conditions
-Fear-driven markets lead to increased activity but poorer efficiency
-Successful traders differentiate themselves through better risk control and sentiment awareness
+or more story-driven (startup-style submission)
+
